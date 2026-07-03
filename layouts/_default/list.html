@@ -1,0 +1,32 @@
+{{ define "main" }}
+<h1 class="mb-4">{{ .Title }}</h1>
+{{ if .Description }}
+  <p class="lead mb-4">{{ .Description }}</p>
+{{ end }}
+{{ $pages := .Pages }}
+{{ if .IsHome }}
+  {{ $pages = where .Site.RegularPages "Section" "posts" }}
+{{ end }}
+<ul class="list-unstyled mb-5">
+  {{ range $pages }}
+    {{ $page := . }}
+    <li class="mb-3">
+      {{ with .Params.header_image }}
+        <a href="{{ $page.RelPermalink }}" class="d-block mb-3">
+          <img src="{{ . | absURL }}" class="img-fluid rounded" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+        </a>
+      {{ end }}
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <div class="text-muted mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
+      {{ if .Description }}
+        <p>{{ .Description | truncate 150 }}</p>
+      {{ end }}
+    </li>
+  {{ else }}
+    <p>No posts found.</p>
+  {{ end }}
+</ul>
+{{ if .Paginator }}
+  {{ template "_internal/pagination.html" . }}
+{{ end }}
+{{ end }}

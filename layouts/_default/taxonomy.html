@@ -1,0 +1,39 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ if .Description }}
+  <p class="lead mb-4">{{ .Description }}</p>
+{{ end }}
+{{ if .Data.Terms }}
+  {{ $taxonomy := .Data.Singular | title }}
+  <h2 class="mb-4">{{ $taxonomy }}s</h2>
+  <ul class="list-unstyled mb-5">
+    {{ range $name, $terms := .Data.Terms }}
+      <li class="mb-2">
+        <a href="{{ .Page.Permalink }}">{{ $name }}</a>
+        <span class="badge bg-secondary ms-2">{{ len $terms }}</span>
+      </li>
+    {{ end }}
+  </ul>
+{{ else if .Pages }}
+  <h2 class="mb-4">Posts ({{ len .Pages }})</h2>
+  <ul class="list-unstyled mb-5">
+    {{ range .Pages }}
+      {{ $page := . }}
+      <li class="mb-3">
+        {{ with .Params.header_image }}
+          <a href="{{ $page.RelPermalink }}" class="d-block mb-3">
+            <img src="{{ . | absURL }}" class="img-fluid rounded" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+          </a>
+        {{ end }}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <div class="text-muted mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
+        {{ if .Description }}
+          <p>{{ .Description | truncate 100 }}</p>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>No posts found.</p>
+{{ end }}
+{{ end }}

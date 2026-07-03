@@ -1,0 +1,22 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ if .Description }}
+  <p class="lead mb-4">{{ .Description }}</p>
+{{ end }}
+{{ $groups := .Pages.GroupByDate "2006-01" }}
+{{ if $groups }}
+  {{ range $groups }}
+    <h2>{{ .Key }}</h2>
+    <ul class="list-unstyled mb-4">
+      {{ range .Pages }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <small class="text-muted">{{ .Date.Format "Jan 2, 2006" }}</small>
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+{{ else }}
+  <p>No posts found.</p>
+{{ end }}
+{{ end }}

@@ -1,0 +1,37 @@
+baseURL = "https://example.org/"
+locale = "en-US"
+title = "Mio Demo"
+theme = "mio"
+
+[params]
+  description = "A sample Hugo site for testing the Mio theme."
+  customCSS = "css/demo.css"
+  # googleAnalyticsID = "G-XXXXXXXXXX"
+
+[taxonomies]
+  tag = "tags"
+
+[[menus.main]]
+  name = "Home"
+  pageRef = "/"
+  weight = 10
+
+[[menus.main]]
+  name = "Posts"
+  pageRef = "/posts"
+  weight = 20
+
+[[menus.main]]
+  name = "Archives"
+  pageRef = "/archives"
+  weight = 30
+
+[[menus.main]]
+  name = "Tags"
+  pageRef = "/tags"
+  weight = 40
+
+[[menus.main]]
+  name = "About"
+  pageRef = "/about"
+  weight = 50

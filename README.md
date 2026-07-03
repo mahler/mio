@@ -1,0 +1,88 @@
+# Mio for Hugo
+
+Mio is a simple Hugo theme that integrates the Bootstrap 5 CSS framework via CDN.
+
+## Features
+
+- Responsive Bootstrap 5 layout
+- Basic navigation bar
+- Stylish article and list pages
+- Footer with copyright
+- Easy to customize via parameters
+
+## Installation
+
+1. Clone this repository into your Hugo site's `themes` directory:
+
+   ```bash
+   git clone https://github.com/yourusername/mio.git themes/mio
+   ```
+
+2. Set the theme in your site's configuration file (`config.toml`, `config.yaml`, or `config.json`).
+
+   Example `config.toml`:
+
+   ```toml
+   theme = "mio"
+   title = "My Hugo Site"
+   ```
+
+## Customization
+
+You can override the following parameters in your site config:
+
+- `params.description`: Site description (used for meta tag).
+- `params.customCSS`: Path to a custom CSS file (relative to site root) to load after Bootstrap.
+- `params.googleAnalyticsID`: Optional Google Analytics 4 measurement ID, such as `G-XXXXXXXXXX`.
+
+Posts can define an optional `header_image` front matter value. The image is shown on the post page and in post lists:
+
+```yaml
+---
+title: "Post with Image"
+header_image: "images/example.jpg"
+header_image_alt: "Description of the header image"
+---
+```
+
+## Development
+
+The theme uses Bootstrap 5 from the CDN. If you prefer to host Bootstrap locally, download the files and place them in `static/` and adjust the links in `layouts/_default/baseof.html`.
+
+## Example Site
+
+An example Hugo site is available in `exampleSite/` for local testing:
+
+```bash
+hugo server --source exampleSite --themesDir ../.. --theme mio
+```
+
+To build the sample without starting a server:
+
+```bash
+hugo --source exampleSite --themesDir ../.. --theme mio
+```
+
+## License
+
+MIT
+
+## Additional Templates
+
+- `layouts/_default/archive.html` – Monthly archive page (create a page with `type: "archive"` or use as a section).
+- `layouts/_default/taxonomy.html` – Tag (or taxonomy) overview page listing all tags with counts.
+- `layouts/_default/term.html` – Individual tag page showing all posts tagged with that term.
+
+To use the archive page, create an `archive.md` in your content root (or in a section) with front matter:
+
+```markdown
+---
+title: "Archives"
+type: "archive"
+date: 2026-01-01
+---
+```
+
+Then visit `/archives/` to see posts grouped by month.
+
+Tag pages are automatically generated at `/tags/` (overview) and `/tags/<tag>/` (individual tag).

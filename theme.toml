@@ -1,0 +1,15 @@
+name = "Mio"
+license = "MIT"
+licenselink = "https://github.com/yourusername/mio/blob/main/LICENSE"
+description = "Mio is a simple Hugo theme using the Bootstrap CSS framework"
+homepage = "https://github.com/yourusername/mio"
+tags = ["mio", "bootstrap", "blog", "responsive"]
+features = ["bootstrap", "responsive"]
+min_version = "0.60.0"
+
+[author]
+  name = "Your Name"
+  homepage = "https://yourwebsite.com"
+
+[demo]
+  homepage = "https://demo.example.com"

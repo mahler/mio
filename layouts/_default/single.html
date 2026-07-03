@@ -1,0 +1,19 @@
+{{ define "main" }}
+<article class="mb-5">
+  <h1>{{ .Title }}</h1>
+  <div class="mb-4 text-muted">
+    <small>{{ .Date.Format "Jan 2, 2006" }}</small>
+    {{ if .Params.tags }}
+      {{ range .Params.tags }}
+        <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}/" class="badge bg-secondary text-decoration-none mx-1">{{ . }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+  {{ with .Params.header_image }}
+    <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+  {{ end }}
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}
