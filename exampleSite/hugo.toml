@@ -7,6 +7,20 @@ theme = "mio"
   description = "A sample Hugo site for testing the Mio theme."
   customCSS = "css/demo.css"
   # googleAnalyticsID = "G-XXXXXXXXXX"
+  # googleAdsenseID = "ca-pub-0000000000000000"
+
+[params.social]
+  github = "https://github.com/example/mio"
+  instagram = "https://www.instagram.com/example"
+  reddit = "https://www.reddit.com/r/hugo"
+
+[[params.footerLinks]]
+  name = "Hugo"
+  url = "https://gohugo.io/"
+
+[[params.footerLinks]]
+  name = "Bootstrap"
+  url = "https://getbootstrap.com/"
 
 [taxonomies]
   tag = "tags"

@@ -34,6 +34,34 @@ You can override the following parameters in your site config:
 - `params.description`: Site description (used for meta tag).
 - `params.customCSS`: Path to a custom CSS file (relative to site root) to load after Bootstrap.
 - `params.googleAnalyticsID`: Optional Google Analytics 4 measurement ID, such as `G-XXXXXXXXXX`.
+- `params.googleAdsenseID`: Optional Google AdSense publisher ID, such as `ca-pub-0000000000000000`.
+- `params.social`: Optional footer links for common social sites.
+- `params.footerLinks`: Optional custom footer links.
+
+Footer links are optional. Mio supports common social links plus custom links:
+
+```toml
+[params.social]
+  twitter = "https://twitter.com/example"
+  x = "https://x.com/example"
+  facebook = "https://www.facebook.com/example"
+  github = "https://github.com/example"
+  instagram = "https://www.instagram.com/example"
+  reddit = "https://www.reddit.com/user/example"
+  linkedin = "https://www.linkedin.com/in/example"
+  youtube = "https://www.youtube.com/@example"
+  mastodon = "https://mastodon.social/@example"
+  tiktok = "https://www.tiktok.com/@example"
+  bluesky = "https://bsky.app/profile/example.bsky.social"
+
+[[params.footerLinks]]
+  name = "Newsletter"
+  url = "https://example.com/newsletter"
+
+[[params.footerLinks]]
+  name = "Store"
+  url = "https://example.com/store"
+```
 
 Posts can define an optional `header_image` front matter value. The image is shown on the post page and in post lists:
 
@@ -86,3 +114,25 @@ date: 2026-01-01
 Then visit `/archives/` to see posts grouped by month.
 
 Tag pages are automatically generated at `/tags/` (overview) and `/tags/<tag>/` (individual tag).
+
+## Sitemap
+
+Hugo generates `sitemap.xml` automatically for sites using Mio. Make sure your site has a real `baseURL` in its config:
+
+```toml
+baseURL = "https://example.com/"
+```
+
+Then build the site and visit `/sitemap.xml`.
+
+## Google Services
+
+Enable Google Analytics 4 or Google AdSense by setting the relevant params:
+
+```toml
+[params]
+  googleAnalyticsID = "G-XXXXXXXXXX"
+  googleAdsenseID = "ca-pub-0000000000000000"
+```
+
+Both are optional. If unset, Mio does not emit those scripts.
