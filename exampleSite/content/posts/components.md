@@ -5,8 +5,11 @@ description: "A post with headings, lists, and inline links for typography check
 header_image: "images/component-grid.svg"
 header_image_alt: "Grid of Mio interface components"
 tags:
-  - mio
+  - bootstrap
   - components
+categories:
+  - Reference
+  - UI
 ---
 
 ## Common Elements

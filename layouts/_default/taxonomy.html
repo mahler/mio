@@ -4,8 +4,6 @@
   <p class="lead mb-4">{{ .Description }}</p>
 {{ end }}
 {{ if .Data.Terms }}
-  {{ $taxonomy := .Data.Singular | title }}
-  <h2 class="mb-4">{{ $taxonomy }}s</h2>
   <ul class="list-unstyled mb-5">
     {{ range $name, $terms := .Data.Terms }}
       <li class="mb-2">

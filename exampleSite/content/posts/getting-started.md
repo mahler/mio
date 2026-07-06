@@ -5,8 +5,11 @@ description: "A short introductory post used to test summaries and metadata."
 header_image: "images/mio-workbench.svg"
 header_image_alt: "Browser workspace mockup for the Mio theme"
 tags:
-  - mio
+  - bootstrap
   - hugo
+categories:
+  - Guides
+  - Basics
 ---
 
 This sample post checks the default single post layout. It has tags, a

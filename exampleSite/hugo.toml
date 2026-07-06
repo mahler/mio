@@ -24,6 +24,7 @@ theme = "mio"
 
 [taxonomies]
   tag = "tags"
+  category = "categories"
 
 [[menus.main]]
   name = "Home"
@@ -44,6 +45,10 @@ theme = "mio"
   name = "Tags"
   pageRef = "/tags"
   weight = 40
+[[menus.main]]
+  name = "Categories"
+  pageRef = "/categories"
+  weight = 45
 
 [[menus.main]]
   name = "About"

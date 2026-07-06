@@ -5,6 +5,9 @@ description: "A second February post to verify archive grouping."
 tags:
   - hugo
   - release
+categories:
+  - News
+  - Releases
 ---
 
 This post exists so the archive template can show multiple entries in the same

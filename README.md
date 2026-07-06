@@ -63,6 +63,20 @@ Footer links are optional. Mio supports common social links plus custom links:
   url = "https://example.com/store"
 ```
 
+
+Categories are supported too. A post can belong to multiple categories:
+
+```yaml
+---
+title: "Post with Categories"
+categories:
+  - Guides
+  - Tutorials
+---
+```
+
+Category pages are available at `/categories/` and `/categories/<category>/`.
+
 Posts can define an optional `header_image` front matter value. The image is shown on the post page and in post lists:
 
 ```yaml

@@ -3,7 +3,7 @@
 {{ if .Description }}
   <p class="lead mb-4">{{ .Description }}</p>
 {{ end }}
-<h2 class="mb-4">Posts ({{ .Pages.Length }})</h2>
+<h2 class="mb-4">Posts ({{ len .Pages }})</h2>
 {{ if .Pages }}
   <ul class="list-unstyled mb-5">
     {{ range .Pages }}
