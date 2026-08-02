@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $usepostimgfolder := .Site.Params.usepostimgfolder }}
 <article class="mb-5">
   <h1>{{ .Title }}</h1>
   <div class="mb-4 text-muted">
@@ -15,7 +16,18 @@
     {{ end }}
   </div>
   {{ with .Params.header_image }}
-    <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ if $usepostimgfolder }}
+      <img src="{{ $.Permalink }}{{ . }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ else }}
+      <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ end }}
+  {{ end }}
+  {{ with .Params.image }}
+    {{ if $usepostimgfolder }}
+      <img src="{{ $.Permalink }}{{ . }}" class="img-fluid rounded mb-4" alt="{{ $.Title }}">
+    {{ else }}
+      <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Title }}">
+    {{ end }}
   {{ end }}
   <div class="content">
     {{ .Content }}
