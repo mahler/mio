@@ -1,0 +1,15 @@
+<nav class="pagination" aria-label="Pagination">
+  {{ with .Paginator.First }}
+    <a class="newer-posts" href="{{ .URL }}">« First</a>
+  {{ end }}
+  {{ if .Paginator.HasPrev }}
+    <a class="newer-posts" href="{{ .Paginator.Prev.URL }}">« Newer</a>
+  {{ end }}
+  <span class="page-number">Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+  {{ if .Paginator.HasNext }}
+    <a class="older-posts" href="{{ .Paginator.Next.URL }}">Older »</a>
+  {{ end }}
+  {{ with .Paginator.Last }}
+    <a class="older-posts" href="{{ .URL }}">Last »</a>
+  {{ end }}
+</nav>

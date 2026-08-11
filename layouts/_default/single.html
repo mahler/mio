@@ -1,6 +1,9 @@
 {{ define "main" }}
+{{ $usepostimgfolder := .Site.Params.usepostimgfolder }}
+{{ $showMeta := .Params.showMeta | default true }}
 <article class="mb-5">
   <h1>{{ .Title }}</h1>
+  {{ if $showMeta }}
   <div class="mb-4 text-muted">
     <small>{{ .Date.Format "Jan 2, 2006" }}</small>
     {{ with .Params.categories }}
@@ -14,8 +17,20 @@
       {{ end }}
     {{ end }}
   </div>
+  {{ end }}
   {{ with .Params.header_image }}
-    <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ if $usepostimgfolder }}
+      <img src="{{ $.Permalink }}{{ . }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ else }}
+      <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Params.header_image_alt | default $.Title }}">
+    {{ end }}
+  {{ end }}
+  {{ with .Params.image }}
+    {{ if $usepostimgfolder }}
+      <img src="{{ $.Permalink }}{{ . }}" class="img-fluid rounded mb-4" alt="{{ $.Title }}">
+    {{ else }}
+      <img src="{{ . | absURL }}" class="img-fluid rounded mb-4" alt="{{ $.Title }}">
+    {{ end }}
   {{ end }}
   <div class="content">
     {{ .Content }}

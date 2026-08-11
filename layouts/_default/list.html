@@ -3,37 +3,119 @@
 {{ if .Description }}
   <p class="lead mb-4">{{ .Description }}</p>
 {{ end }}
-{{ $pages := .Pages }}
+{{ $usepostimgfolder := .Site.Params.usepostimgfolder }}
 {{ if .IsHome }}
-  {{ $pages = where .Site.RegularPages "Section" "posts" }}
-{{ end }}
-<ul class="list-unstyled mb-5">
-  {{ range $pages }}
-    {{ $page := . }}
-    <li class="mb-3">
-      {{ with .Params.header_image }}
-        <a href="{{ $page.RelPermalink }}" class="d-block mb-3">
-          <img src="{{ . | absURL }}" class="img-fluid rounded" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
-        </a>
-      {{ end }}
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <div class="text-muted mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
-      {{ with .Params.categories }}
-        <div class="mb-2">
-          {{ range . }}
-            <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" class="badge bg-primary text-decoration-none me-1">{{ . }}</a>
-          {{ end }}
+  {{ $pages := where .Site.RegularPages "Section" "post" }}
+  {{ .Paginate $pages }}
+  <ul class="list-unstyled mb-5">
+    {{ range .Paginator.Pages }}
+      {{ $page := . }}
+      <li class="mb-3">
+        <div class="card">
+          <div class="row g-0">
+            {{ with .Params.header_image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            {{ with .Params.image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            <div class="{{ if or .Params.header_image .Params.image }}col-md-8{{ else }}col-12{{ end }}">
+              <div class="card-body">
+                <h2 class="card-title h4"><a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a></h2>
+                <div class="text-muted mb-2 small">{{ .Date.Format "Jan 2, 2006" }}</div>
+                {{ with .Params.categories }}
+                  <div class="mb-2">
+                    {{ range . }}
+                      <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" class="badge bg-primary text-decoration-none me-1">{{ . }}</a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                {{ if .Description }}
+                  <p class="card-text">{{ .Description | truncate 150 }}</p>
+                {{ else if .Summary }}
+                  <p class="card-text">{{ .Summary }}</p>
+                {{ end }}
+              </div>
+            </div>
+          </div>
         </div>
-      {{ end }}
-      {{ if .Description }}
-        <p>{{ .Description | truncate 150 }}</p>
-      {{ end }}
-    </li>
-  {{ else }}
-    <p>No posts found.</p>
-  {{ end }}
-</ul>
+      </li>
+    {{ else }}
+      <p>No posts found.</p>
+    {{ end }}
+  </ul>
+{{ else }}
+  <ul class="list-unstyled mb-5">
+    {{ range .Pages }}
+      {{ $page := . }}
+      <li class="mb-3">
+        <div class="card">
+          <div class="row g-0">
+            {{ with .Params.header_image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            {{ with .Params.image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            <div class="{{ if or .Params.header_image .Params.image }}col-md-8{{ else }}col-12{{ end }}">
+              <div class="card-body">
+                <h2 class="card-title h4"><a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a></h2>
+                <div class="text-muted mb-2 small">{{ .Date.Format "Jan 2, 2006" }}</div>
+                {{ with .Params.categories }}
+                  <div class="mb-2">
+                    {{ range . }}
+                      <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" class="badge bg-primary text-decoration-none me-1">{{ . }}</a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                {{ if .Description }}
+                  <p class="card-text">{{ .Description | truncate 150 }}</p>
+                {{ else if .Summary }}
+                  <p class="card-text">{{ .Summary }}</p>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    {{ else }}
+      <p>No posts found.</p>
+    {{ end }}
+  </ul>
+{{ end }}
 {{ if .Paginator }}
-  {{ template "_internal/pagination.html" . }}
+  {{ partial "pagination.html" . }}
 {{ end }}
 {{ end }}

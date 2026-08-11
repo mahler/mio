@@ -1,18 +1,22 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ if .Description }}
-  <p class="lead mb-4">{{ .Description }}</p>
-{{ end }}
 {{ if .Data.Terms }}
-  <ul class="list-unstyled mb-5">
-    {{ range $name, $terms := .Data.Terms }}
-      <li class="mb-2">
-        <a href="{{ .Page.Permalink }}">{{ $name }}</a>
-        <span class="badge bg-secondary ms-2">{{ len $terms }}</span>
-      </li>
-    {{ end }}
-  </ul>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="single category">
+        <h3 class="side-title">{{ .Title }}</h3>
+        <ul class="list-unstyled">
+          {{ range $name, $terms := .Data.Terms }}
+            <li><a href="{{ .Page.Permalink }}" title="{{ $name }}">{{ $name }} <span class="pull-right">{{ len $terms }}</span></a></li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
 {{ else if .Pages }}
+  <h1>{{ .Title }}</h1>
+  {{ if .Description }}
+    <p class="lead mb-4">{{ .Description }}</p>
+  {{ end }}
   <h2 class="mb-4">Posts ({{ len .Pages }})</h2>
   <ul class="list-unstyled mb-5">
     {{ range .Pages }}
@@ -32,6 +36,10 @@
     {{ end }}
   </ul>
 {{ else }}
+  <h1>{{ .Title }}</h1>
+  {{ if .Description }}
+    <p class="lead mb-4">{{ .Description }}</p>
+  {{ end }}
   <p>No posts found.</p>
 {{ end }}
 {{ end }}
