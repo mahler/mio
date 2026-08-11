@@ -38,6 +38,32 @@ You can override the following parameters in your site config:
 - `params.social`: Optional footer links for common social sites.
 - `params.footerLinks`: Optional custom footer links.
 
+### Adding Custom CSS
+
+To add custom CSS styling to your site:
+
+1. Create a CSS file in your site's `static/` directory. For example: `static/css/custom.css`
+
+2. Add your custom styles to the file:
+   ```css
+   /* static/css/custom.css */
+   body {
+     background-color: #f8f9fa;
+   }
+   
+   .navbar-brand {
+     font-weight: bold;
+   }
+   ```
+
+3. Configure the `customCSS` parameter in your site's `config.toml`:
+   ```toml
+   [params]
+     customCSS = "css/custom.css"
+   ```
+
+The custom CSS file will be loaded after Bootstrap, allowing you to override Bootstrap styles as needed.
+
 Footer links are optional. Mio supports common social links plus custom links:
 
 ```toml
