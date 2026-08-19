@@ -6,7 +6,7 @@
 <h2 class="mb-4">Posts ({{ len .Pages }})</h2>
 {{ if .Pages }}
   <ul class="list-unstyled mb-5">
-    {{ range .Pages }}
+    {{ range first 5 (sort .Pages "Date" "desc") }}
       {{ $page := . }}
       <li class="mb-3">
         {{ with .Params.header_image }}

@@ -6,7 +6,14 @@
         <h3 class="side-title">{{ .Title }}</h3>
         <ul class="list-unstyled">
           {{ range $name, $terms := .Data.Terms }}
-            <li><a href="{{ .Page.Permalink }}" title="{{ $name }}">{{ $name }} <span class="pull-right">{{ len $terms }}</span></a></li>
+            <li>
+              <a href="{{ .Page.Permalink }}" title="{{ $name }}">{{ $name }} <span class="pull-right">{{ len $terms }}</span></a>
+              <ul class="list-unstyled ms-3 mt-2 small">
+                {{ range first 5 (sort $terms "Date" "desc") }}
+                  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                {{ end }}
+              </ul>
+            </li>
           {{ end }}
         </ul>
       </div>
