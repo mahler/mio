@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">Component grid</title>
+  <desc id="desc">A grid of interface components for testing Mio.</desc>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <rect x="80" y="64" width="1040" height="412" rx="20" fill="#f1f3f5"/>
+  <rect x="140" y="124" width="290" height="126" rx="14" fill="#0d6efd"/>
+  <rect x="456" y="124" width="290" height="126" rx="14" fill="#198754"/>
+  <rect x="772" y="124" width="290" height="126" rx="14" fill="#dc3545"/>
+  <rect x="140" y="286" width="180" height="54" rx="10" fill="#212529"/>
+  <rect x="344" y="286" width="180" height="54" rx="10" fill="#6c757d"/>
+  <rect x="548" y="286" width="180" height="54" rx="10" fill="#ffc107"/>
+  <rect x="752" y="286" width="180" height="54" rx="10" fill="#20c997"/>
+  <rect x="140" y="382" width="710" height="18" rx="9" fill="#adb5bd"/>
+  <rect x="140" y="424" width="540" height="18" rx="9" fill="#ced4da"/>
+</svg>
