@@ -176,3 +176,7 @@ Enable Google Analytics 4 or Google AdSense by setting the relevant params:
 ```
 
 Both are optional. If unset, Mio does not emit those scripts.
+
+## Recent updates
+
+- 2026-08-29: Restored `exampleSite` static assets into `static/` (added `static/css/demo.css` and `static/images/component-grid.svg`, `static/images/mio-workbench.svg`). Shortcodes in `layouts/shortcodes` were synced from the upstream repository.
