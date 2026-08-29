@@ -1,52 +1,76 @@
 {{ define "main" }}
+<h1 class="mb-4">{{ .Title }}</h1>
+{{ if .Description }}
+  <p class="lead mb-4">{{ .Description }}</p>
+{{ end }}
+{{ $usepostimgfolder := .Site.Params.usepostimgfolder }}
 {{ if .Data.Terms }}
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="single category">
-        <h3 class="side-title">{{ .Title }}</h3>
-        <ul class="list-unstyled">
-          {{ range $name, $terms := .Data.Terms }}
-            <li>
-              <a href="{{ .Page.Permalink }}" title="{{ $name }}">{{ $name }} <span class="pull-right">{{ len $terms }}</span></a>
-              <ul class="list-unstyled ms-3 mt-2 small">
-                {{ range first 5 (sort $terms "Date" "desc") }}
-                  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                {{ end }}
-              </ul>
-            </li>
+  <ul class="list-unstyled mb-5">
+    {{ range $name, $terms := .Data.Terms }}
+      <li class="mb-3">
+        <h3 class="h4"><a href="{{ .Page.Permalink }}" class="text-decoration-none">{{ $name }}</a> <span class="badge bg-secondary">{{ len $terms }}</span></h3>
+        <ul class="list-unstyled ms-3 mt-2 small">
+          {{ range first 5 (sort $terms "Date" "desc") }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
           {{ end }}
         </ul>
-      </div>
-    </div>
-  </div>
+      </li>
+    {{ end }}
+  </ul>
 {{ else if .Pages }}
-  <h1>{{ .Title }}</h1>
-  {{ if .Description }}
-    <p class="lead mb-4">{{ .Description }}</p>
-  {{ end }}
   <h2 class="mb-4">Posts ({{ len .Pages }})</h2>
   <ul class="list-unstyled mb-5">
-    {{ range .Pages }}
+    {{ range first 5 (sort .Pages "Date" "desc") }}
       {{ $page := . }}
       <li class="mb-3">
-        {{ with .Params.header_image }}
-          <a href="{{ $page.RelPermalink }}" class="d-block mb-3">
-            <img src="{{ . | absURL }}" class="img-fluid rounded" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
-          </a>
-        {{ end }}
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <div class="text-muted mb-2">{{ .Date.Format "Jan 2, 2006" }}</div>
-        {{ if .Description }}
-          <p>{{ .Description | truncate 100 }}</p>
-        {{ end }}
+        <div class="card">
+          <div class="row g-0">
+            {{ with .Params.header_image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Params.header_image_alt | default $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            {{ with .Params.image }}
+              <div class="col-md-4">
+                <a href="{{ $page.RelPermalink }}">
+                  {{ if $usepostimgfolder }}
+                    <img src="{{ $page.RelPermalink }}{{ . }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ else }}
+                    <img src="{{ . | absURL }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ $page.Title }}">
+                  {{ end }}
+                </a>
+              </div>
+            {{ end }}
+            <div class="{{ if or .Params.header_image .Params.image }}col-md-8{{ else }}col-12{{ end }}">
+              <div class="card-body">
+                <h2 class="card-title h4"><a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a></h2>
+                <div class="text-muted mb-2 small">{{ .Date.Format "Jan 2, 2006" }}</div>
+                {{ with .Params.categories }}
+                  <div class="mb-2">
+                    {{ range . }}
+                      <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" class="badge bg-primary text-decoration-none me-1">{{ . }}</a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                {{ if .Description }}
+                  <p class="card-text">{{ .Description | truncate 150 }}</p>
+                {{ else if .Summary }}
+                  <p class="card-text">{{ .Summary }}</p>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     {{ end }}
   </ul>
 {{ else }}
-  <h1>{{ .Title }}</h1>
-  {{ if .Description }}
-    <p class="lead mb-4">{{ .Description }}</p>
-  {{ end }}
   <p>No posts found.</p>
 {{ end }}
 {{ end }}
